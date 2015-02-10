@@ -1,16 +1,29 @@
 <?php
+	include "tile.php";
+
 	function generateMaze(){
-		$maze = array();
-		$rowCount = 10;
-		$colCount = 10;
+		$mazeTiles = array();
+		$rowCount = 20;
+		$colCount = 30;
 	
 		for($rowIndex = 0; $rowIndex < $rowCount; $rowIndex++){
-			$maze[$rowIndex] = array();
+			$mazeTiles[$rowIndex] = array();
 			for($colIndex = 0; $colIndex < $colCount; $colIndex++){
-				$maze[$rowIndex][$colIndex] = $rowIndex * $colCount + $colIndex;
+				$mazeTiles[$rowIndex][$colIndex] = new Tile($colIndex, $rowIndex);
 			}
 		}
 		
-		return $maze;
+		for($currentRow = 1; $currentRow < $rowCount - 2;){
+			for($currentCol = 1; $currentCol < $colCount - 2;){
+				$mazeTiles[$currentRow][$currentCol]->makeFloor();
+				if(mt_rand(0, 1) === 1 && $currentRow < $rowCount - 1){
+					$currentRow++;
+				}else if($currentCol < $colCount - 1){
+					$currentCol++;
+				}
+			}
+		}
+		
+		return $mazeTiles;
 	}
 ?>

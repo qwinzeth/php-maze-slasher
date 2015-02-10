@@ -1,3 +1,11 @@
-span{
-	margin: 10px;
+.tile{
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+.tile.wall{
+	background-color: black;
 }
